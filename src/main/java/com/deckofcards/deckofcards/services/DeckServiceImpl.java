@@ -53,14 +53,18 @@ public class DeckServiceImpl implements DeckService {
     }
 
     @Override
-    public Map<String, Object> getNumOfUndealtCardsPerSuit(GameDeck gameDeck) {
-        Map<CardSuit, Integer> cardsRemaining = new HashMap<>();
+    public Map<CardSuit, Integer> getNumOfUndealtCardsPerSuit(GameDeck gameDeck) {
+        Map<CardSuit, Integer> countUndealtSuits = new HashMap<>();
 
         List<Card> remainingCards = gameDeck.getCards();
         for(CardSuit suit : CardSuit.values()) {
-
+            countUndealtSuits.put(suit, 0);
+            for(Card card : remainingCards) {
+                if(card.getSuit().equals(suit))
+                    countUndealtSuits.put(suit, countUndealtSuits.get(suit) + 1);
+            }
         }
-
+        return countUndealtSuits;
     }
 
     @Override

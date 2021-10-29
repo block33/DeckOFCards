@@ -1,5 +1,6 @@
 package com.deckofcards.deckofcards.controller;
 
+import com.deckofcards.deckofcards.enums.CardSuit;
 import com.deckofcards.deckofcards.exceptions.InternalErrorException;
 import com.deckofcards.deckofcards.models.Deck;
 import com.deckofcards.deckofcards.services.DeckService;
@@ -10,8 +11,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RequestMapping("/api/v1/decks")
 @RestController
@@ -89,14 +93,14 @@ public class DeckController {
             @ApiResponse(code = 500, message = "")
     })
     @ResponseBody
-    public ResponseEntity<Object> getRemainingSuits() {
+    public ResponseEntity<Map<CardSuit, Integer>> getRemainingSuits() {
         if(!gameService.gameExists())
             throw new InternalErrorException("The game was not yet launched. Please launch a game before dealing cards.");
 
         if(gameService.getCurrentGame().getGameDeck().getCards().size() == 0)
             throw new InternalErrorException("You must add a deck before using this operation. Please launch the create deck first.");
 
-        deckService.getNumOfUndealtCardsPerSuit(gameService.getCurrentGame().getGameDeck());
-        return null;
+        Map<CardSuit, Integer> remainingSuits = deckService.getNumOfUndealtCardsPerSuit(gameService.getCurrentGame().getGameDeck());
+        return new ResponseEntity<>(remainingSuits, HttpStatus.OK);
     }
 }
