@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "27a40c3d-ef62-4155-8548-5795d6b8e40a",
+		"name": "DeckOfCardsAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Game Controller",
+			"item": [
+				{
+					"name": "204 - Create Game POST /create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/games/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"games",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 - Create Game POST /create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bad_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/games/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"games",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "409 - Create Game POST /create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/games/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"games",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "500 - Create Game POST /create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/games/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"games",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "204 - Create Game DELETE /create",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/games/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"games",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "500 - Create Game DELETE /create",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/games/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"games",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Player Controller",
+			"item": [
+				{
+					"name": "204 - Add Player POST /add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"playerId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Antoine Hakim\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/players/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"players",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "200 - Get Players GET /players/id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Antoine Hakim\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/players/getPlayer/{{playerId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"players",
+								"getPlayer",
+								"{{playerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "200 - Get Players GET /players",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Antoine Hakim\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/players/getPlayers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"players",
+								"getPlayers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "200 - Get Player Descending GET /players-descending-order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Antoine Hakim\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/players/getPlayersDescendingOrder",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"players",
+								"getPlayersDescendingOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 - Add Player POST /add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/players/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"players",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401 - Add Player POST /add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bad_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Antoine Hakim\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/players/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"players",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "500 - Add Player POST /add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/players/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"players",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "204 - Remove Player DELETE /remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/players/remove/{{playerId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"players",
+								"remove",
+								"{{playerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "500 - Remove Player DELETE /remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/games/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"games",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deck Controller",
+			"item": [
+				{
+					"name": "204 - Create Deck POST /create-deck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/decks/create-deck",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"decks",
+								"create-deck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "204 - Shuffle Deck POST /shuffle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/decks/shuffle",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"decks",
+								"shuffle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "204 - Deal cards POST /deal-cards",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/decks/deal-cards?playerId={{playerId}}&numCards=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"decks",
+								"deal-cards"
+							],
+							"query": [
+								{
+									"key": "playerId",
+									"value": "{{playerId}}"
+								},
+								{
+									"key": "numCards",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "204 - Get Remaining Suits GET /get-remaining-suits",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/decks/get-remaining-suits",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"decks",
+								"get-remaining-suits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
