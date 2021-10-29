@@ -12,5 +12,6 @@ import java.util.List;
 @Getter
 public class Player extends BaseEntity {
     private String name;
+    private int count;
     private List<Card> hand = new ArrayList<>();
 }

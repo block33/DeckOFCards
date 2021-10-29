@@ -8,7 +8,8 @@ import java.util.List;
 @Setter
 @Getter
 public class PlayerDto {
-    String playerId;
+    private String playerId;
     private String name;
     private List<Card> hand;
+    private int count;
 }

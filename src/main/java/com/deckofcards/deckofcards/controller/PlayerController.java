@@ -1,11 +1,9 @@
 package com.deckofcards.deckofcards.controller;
 
 import com.deckofcards.deckofcards.dtos.PlayerDto;
-import com.deckofcards.deckofcards.exceptions.CustomExceptionHandler;
 import com.deckofcards.deckofcards.exceptions.InternalErrorException;
 import com.deckofcards.deckofcards.exceptions.RessourceNotFoundException;
 import com.deckofcards.deckofcards.mappers.PlayerMapper;
-import com.deckofcards.deckofcards.models.Card;
 import com.deckofcards.deckofcards.models.Player;
 import com.deckofcards.deckofcards.services.GameService;
 import com.deckofcards.deckofcards.services.PlayerService;
@@ -95,6 +93,32 @@ public class PlayerController {
         return new ResponseEntity<>(playerDto, HttpStatus.OK);
     }
 
+    @GetMapping("/getPlayersDescendingOrder")
+    @ApiOperation(value = "Get list of all players with they respective hand sorted by the total value of their hand in ascending order.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Player successfully added."),
+            @ApiResponse(code = 400, message = ""),
+            @ApiResponse(code = 401, message = ""),
+            @ApiResponse(code = 404, message = ""),
+            @ApiResponse(code = 500, message = "")
+    })
+    @ResponseBody
+    public ResponseEntity<List<PlayerDto>> getPlayersDescendingOrder() {
+        if(!gameService.gameExists())
+            throw new InternalErrorException("ERROR - The game was not yet launched. Please launch a game before adding a player.");
+
+        if(playerService.getPlayers().size() == 0)
+            throw new RessourceNotFoundException("ERROR - You need to add a player before.");
+
+        List<PlayerDto> playersDto = new ArrayList<>();
+        playerService.getPlayers()
+                .stream()
+                .forEach(player -> playersDto.add(playerMapper.convertToPlayerDto(player)));
+
+        playerService.sortPlayers(playersDto);
+
+        return new ResponseEntity<>(playersDto, HttpStatus.OK);
+    }
 
     @DeleteMapping("/remove/{playerId}")
     @ApiResponses(value = {

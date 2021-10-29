@@ -1,5 +1,6 @@
 package com.deckofcards.deckofcards.services;
 
+import com.deckofcards.deckofcards.dtos.PlayerDto;
 import com.deckofcards.deckofcards.models.Card;
 import com.deckofcards.deckofcards.models.Player;
 import lombok.Getter;
@@ -8,7 +9,10 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -36,6 +40,11 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<Player> getPlayers() {
         return players;
+    }
+
+    @Override
+    public void sortPlayers(List<PlayerDto> playerDtos) {
+        playerDtos.sort(Comparator.comparing(PlayerDto::getCount).reversed());
     }
 
     @Override

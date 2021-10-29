@@ -13,7 +13,6 @@ import lombok.Setter;
 public class Card {
     private CardValue value;
     private CardSuit suit;
-    //private CardColor color;
 
     public Card(CardValue value, CardSuit suit) {
         this.value = value;

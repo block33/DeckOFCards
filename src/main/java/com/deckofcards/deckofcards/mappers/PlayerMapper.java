@@ -1,11 +1,13 @@
 package com.deckofcards.deckofcards.mappers;
 
 import com.deckofcards.deckofcards.dtos.PlayerDto;
+import com.deckofcards.deckofcards.models.Card;
 import com.deckofcards.deckofcards.models.Player;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
 import java.util.UUID;
 
 @Mapper(componentModel = "spring")
@@ -16,6 +18,7 @@ public interface PlayerMapper {
 
     @Mappings(value = {
             @Mapping(target = "playerId", expression = "java(getUUIDAsString(player.getId()))"),
+            @Mapping(target = "count", expression = "java(calculateTotalValueOfCards(player.getHand()))"),
             @Mapping(target = "name", source = "player.name"),
             @Mapping(target = "hand", source = "player.hand")
     })
@@ -23,5 +26,13 @@ public interface PlayerMapper {
 
     default String getUUIDAsString(UUID uuid) {
         return uuid.toString();
+    }
+
+    default int calculateTotalValueOfCards(List<Card> hand) {
+        int sum = 0;
+        for(Card card : hand) {
+            sum += card.getValue().getValue();
+        }
+        return sum;
     }
 }
