@@ -31,5 +31,6 @@
 1. The API currently supports all endpoints except for one: *Get the count of each card (suit and value) remaining in the game deck sorted by suit ( hearts, spades, clubs, and diamonds) and face value from high value to low value (King, Queen, Jack, 10….2, Ace with value of 1)*
 2. Tests are currently incomplete but the foundation is there. 
 3. Error handling is implemented but some error testing might not return string, only the status code.
+4. Swagger UI is implemented but doesn't run due to Spring boot being spring boot.
 
-####**If you need my help in any way please do not hesitate to contact me at any time.
+###**If you need my help in any way please do not hesitate to contact me at any time.
